@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanu ❤️</title>
+    <!-- Google Fonts: Montserrat (Modern UI) and Great Vibes & Caveat (Romantic/Handwritten) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&family=Caveat:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Link script.js logic -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Background Canvas for Interactive Particle Animation (Hearts, Rose Petals, Fireworks, Confetti) -->
+    <canvas id="animation-canvas"></canvas>
+
+    <!-- Music Control Icon (Top Right Floating Glass Button) -->
+    <button id="music-toggle" class="glass-btn audio-loading" aria-label="Toggle Music">
+        <div class="music-icon-container">
+            <span class="music-note note-1">♪</span>
+            <span class="music-note note-2">♫</span>
+            <span class="music-note note-3">♬</span>
+            <svg class="speaker-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path class="volume-wave wave-1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path class="volume-wave wave-2" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                <line class="mute-line" x1="1" y1="1" x2="23" y2="23" style="display: none;"></line>
+            </svg>
+        </div>
+    </button>
+
+    <!-- App Container -->
+    <div id="app-container">
+
+        <!-- 1. WELCOME SCREEN -->
+        <section id="welcome-screen" class="active">
+            <div class="glass-card welcome-card">
+                <div class="heart-pulse-container">
+                    <div class="heart-pulse">❤️</div>
+                </div>
+                <h1 class="cursive-title welcome-title">A Special Birthday Surprise For My Beautiful Thanu</h1>
+                <p class="subtitle">Only the real Thanu can unlock this surprise...</p>
+                
+                <div class="instruction-box">
+                    <p>Enter the gate of memories. Please turn on your volume for a better experience. 🎧</p>
+                </div>
+
+                <button id="start-btn" class="primary-btn glow-effect">
+                    Unlock Surprise
+                    <span class="btn-shine"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. QUIZ FLOW SCREEN -->
+        <section id="quiz-screen">
+            <div class="glass-card quiz-card" id="quiz-card">
+                <!-- Correct Answer Checkmark Overlay -->
+                <div class="quiz-overlay" id="quiz-overlay">
+                    <div class="checkmark-circle">
+                        <div class="checkmark draw"></div>
+                    </div>
+                    <p class="success-text">Correct, My Love! ❤️</p>
+                </div>
+
+                <!-- Progress Header -->
+                <div class="quiz-progress-container">
+                    <span class="quiz-step-indicator" id="quiz-step-text">Question 1 of 5</span>
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                    </div>
+                </div>
+
+                <!-- Question Area -->
+                <div class="quiz-question-area">
+                    <h2 class="question-title" id="quiz-question-title">What is your nickname?</h2>
+                    
+                    <div class="input-container">
+                        <input type="text" id="quiz-input" placeholder="Type your answer here..." autocomplete="off" required>
+                        <span class="input-line"></span>
+                    </div>
+
+                    <p class="error-msg" id="error-msg">Oops 😅 That's not correct. Try again ❤️</p>
+                    <p class="hint-msg" id="hint-msg"></p>
+                </div>
+
+                <button id="quiz-submit-btn" class="primary-btn submit-btn">
+                    Submit Answer
+                    <span class="btn-shine"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 3. CINEMATIC TRANSITION SCREEN -->
+        <section id="transition-screen">
+            <div class="transition-message">
+                <h2 class="glowing-transition-text" id="transition-text">Every memory with you is my favorite...</h2>
+            </div>
+        </section>
+
+        <!-- 4. MEMORY SLIDESHOW SCREEN -->
+        <section id="slideshow-screen">
+            <!-- Floating Elements inside slideshow (visual layer) -->
+            <div class="slideshow-light-rays"></div>
+            
+            <!-- Slideshow Card Container -->
+            <div class="slideshow-container" id="slideshow-container">
+                <!-- Polaroid Frame -->
+                <div class="polaroid-card" id="slideshow-card">
+                    <div class="polaroid-img-container">
+                        <img src="" alt="Our Memory" class="polaroid-img" id="slideshow-img" onerror="handleImageError(this)">
+                        <div class="heart-mask-overlay"></div>
+                    </div>
+                    <div class="polaroid-caption" id="slideshow-caption">
+                        Loading memories...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interspersed Romantic Quotes Panel -->
+            <div class="slideshow-quote-overlay" id="slideshow-quote-overlay">
+                <span class="heart-icon">❤️</span>
+                <span class="quote-text" id="slideshow-quote-text">You are my happiest place.</span>
+                <span class="heart-icon">❤️</span>
+            </div>
+        </section>
+
+        <!-- 5. GRAND BIRTHDAY CELEBRATION -->
+        <section id="celebration-screen">
+            <div class="glass-card celebration-card">
+                <div class="celebration-header">
+                    <div class="glowing-hearts-row">
+                        <span>❤️</span><span>✨</span><span>🎈</span><span>✨</span><span>❤️</span>
+                    </div>
+                    <h1 class="celebration-title animated-gradient-text">Happy Birthday Thanu ❤️</h1>
+                </div>
+
+                <div class="love-letter">
+                    <p class="letter-para">You are the most beautiful part of my life.</p>
+                    <p class="letter-para">Thank you for every smile,</p>
+                    <p class="letter-para">every memory,</p>
+                    <p class="letter-para">and every moment.</p>
+                    <br>
+                    <p class="letter-para text-highlight">I love you more than words can ever describe.</p>
+                    <br>
+                    <p class="letter-para signature">Happy Birthday My Love ❤️</p>
+                </div>
+
+                <div class="forever-badge-container">
+                    <div class="forever-badge">
+                        <span>I Love You Forever ❤️</span>
+                    </div>
+                </div>
+
+                <!-- Custom Voice Message Controller -->
+                <div class="voice-card">
+                    <p class="voice-title">🎙️ A Voice Message For You</p>
+                    <div class="voice-controls">
+                        <button id="voice-play-btn" class="voice-play-btn" aria-label="Play Voice Message">
+                            <svg class="play-svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            <svg class="pause-svg" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
+                        <div class="audio-progress-bar">
+                            <div class="audio-progress-fill" id="voice-progress"></div>
+                        </div>
+                        <span class="audio-time" id="voice-time">0:00</span>
+                    </div>
+                </div>
+
+                <button id="play-again-btn" class="secondary-btn">
+                    Relive the Magic
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Hidden audio element definitions for background music & greeting -->
+    <audio id="bgm-audio" loop preload="auto">
+        <source src="romantic-bgm.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="birthday-audio" preload="auto">
+        <source src="happy-birthday.mp3" type="audio/mpeg">
+    </audio>
+</body>
+</html>

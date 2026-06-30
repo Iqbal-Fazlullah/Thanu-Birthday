@@ -1,0 +1,1104 @@
+/* ==========================================================================
+   Thanu's Birthday Surprise - Stylesheet
+   Design Philosophy: Rich Glassmorphism, Cinematic Motion, & Heartfelt Pastels
+   ========================================================================== */
+
+/* --- Custom Variables & Tokens --- */
+:root {
+    --bg-grad-1: #ffd3e8; /* Soft Rose Pink */
+    --bg-grad-2: #e9d8fd; /* Lavender Purple */
+    --bg-grad-3: #ffffff; /* pure White */
+    --bg-grad-4: #fbcfe8; /* Deeper Pink */
+    
+    --primary-color: #ec4899; /* Vibrant Pink */
+    --primary-hover: #db2777; /* Deep Rose Pink */
+    --primary-glow: rgba(236, 72, 153, 0.4);
+    
+    --success-color: #10b981; /* Emerald Green */
+    --error-color: #ef4444; /* Soft Red */
+    
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 12px 40px 0 rgba(236, 72, 153, 0.12);
+    --glass-highlight: rgba(255, 255, 255, 0.7);
+    
+    --text-main: #3f3f46; /* Charcoal */
+    --text-muted: #71717a; /* Muted Grey */
+    --text-romantic: #be185d; /* Dark Rose */
+    
+    --font-ui: 'Montserrat', sans-serif;
+    --font-handwritten: 'Caveat', cursive;
+    --font-serif: 'Playfair Display', serif;
+    --font-cursive: 'Great Vibes', cursive;
+}
+
+/* --- Reset & Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Canvas and elements handle bounds */
+    font-family: var(--font-ui);
+    color: var(--text-main);
+    background: linear-gradient(-45deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3), var(--bg-grad-4));
+    background-size: 400% 400%;
+    animation: gradientFlow 20s ease infinite;
+    position: relative;
+}
+
+/* --- Animated Background Gradient --- */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Canvas Layer --- */
+#animation-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* Allows clicks to pass through to buttons */
+}
+
+/* --- App Container & Layout --- */
+#app-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+section {
+    position: absolute;
+    width: 100%;
+    max-width: 480px;
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+    pointer-events: none;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+section.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: all;
+}
+
+/* --- Glassmorphism Card System --- */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    box-shadow: var(--glass-shadow);
+    padding: 40px 30px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.5s ease;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    pointer-events: none;
+}
+
+/* --- Buttons Styles --- */
+.primary-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ec4899 0%, #d946ef 100%);
+    border: none;
+    outline: none;
+    color: white;
+    padding: 16px 28px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px var(--primary-glow);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-family: var(--font-ui);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(236, 72, 153, 0.6);
+}
+
+.primary-btn:active {
+    transform: translateY(-1px) scale(0.99);
+}
+
+/* Button Shine animation */
+.btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.35) 40%,
+        rgba(255, 255, 255, 0) 50%
+    );
+    transition: all 0.6s ease;
+}
+
+.primary-btn:hover .btn-shine {
+    left: 100%;
+    transition: all 0.6s ease;
+}
+
+/* Glow Effect */
+.glow-effect {
+    animation: buttonPulse 2.5s infinite;
+}
+
+@keyframes buttonPulse {
+    0% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(236, 72, 153, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
+}
+
+.secondary-btn {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 18px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.secondary-btn:hover {
+    background: rgba(236, 72, 153, 0.08);
+    color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* --- Floating Music Control Button --- */
+.glass-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.25);
+}
+
+.music-icon-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.speaker-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+/* Floating Music Notes Animation */
+.music-note {
+    position: absolute;
+    font-size: 14px;
+    opacity: 0;
+    color: var(--primary-color);
+    pointer-events: none;
+}
+
+.note-1 { top: 5px; left: 5px; animation: floatNote1 2.5s infinite linear; }
+.note-2 { top: 0px; right: 8px; animation: floatNote2 2.8s infinite linear 0.5s; }
+.note-3 { bottom: 5px; right: 5px; animation: floatNote1 3s infinite linear 1s; }
+
+@keyframes floatNote1 {
+    0% { transform: translateY(0) rotate(0deg) scale(0.5); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-25px) translateX(-10px) rotate(-45deg) scale(1.1); opacity: 0; }
+}
+
+@keyframes floatNote2 {
+    0% { transform: translateY(0) rotate(0deg) scale(0.5); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-22px) translateX(8px) rotate(45deg) scale(1.2); opacity: 0; }
+}
+
+/* Music Playing States */
+.playing .speaker-icon {
+    animation: pulseSpeaker 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseSpeaker {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+
+/* --- 1. Welcome Screen details --- */
+.welcome-card {
+    border-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 15px 45px rgba(236, 72, 153, 0.18);
+}
+
+.heart-pulse-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart-pulse {
+    font-size: 3.5rem;
+    animation: heartPulseAnim 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+@keyframes heartPulseAnim {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1.1); }
+    42% { transform: scale(1.35); }
+    70% { transform: scale(1); }
+}
+
+.cursive-title {
+    font-family: var(--font-cursive);
+    color: var(--text-romantic);
+    text-shadow: 0 2px 4px rgba(236, 72, 153, 0.15);
+}
+
+.welcome-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+}
+
+.instruction-box {
+    background: rgba(255, 255, 255, 0.25);
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    border-left: 3px solid var(--primary-color);
+}
+
+/* --- 2. Quiz Screen Details --- */
+.quiz-card {
+    transition: transform 0.1s ease;
+}
+
+.quiz-progress-container {
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.quiz-step-indicator {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.quiz-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.quiz-progress-fill {
+    width: 20%;
+    height: 100%;
+    background: linear-gradient(to right, #ec4899, #d946ef);
+    border-radius: 10px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quiz-question-area {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.question-title {
+    font-size: 1.5rem;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 25px;
+    line-height: 1.3;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+#quiz-input {
+    width: 100%;
+    padding: 15px 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    font-family: var(--font-ui);
+    font-size: 1.15rem;
+    text-align: center;
+    color: var(--text-main);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#quiz-input:focus {
+    border-color: var(--primary-color);
+}
+
+.input-line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#quiz-input:focus ~ .input-line {
+    width: 100%;
+    left: 0;
+}
+
+.error-msg {
+    font-size: 0.9rem;
+    color: var(--error-color);
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.error-msg.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hint-msg {
+    font-size: 0.88rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.hint-msg.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Success Card Overlay inside Quiz */
+.quiz-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.quiz-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* SVG Success Checkmark Drawing */
+.checkmark-circle {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 20px;
+}
+
+.checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 4;
+    stroke: var(--success-color);
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px var(--success-color);
+    animation: fillCheckmark .4s ease-in-out .4s forwards, scaleCheckmark .3s ease-in-out .9s both;
+}
+
+.checkmark-circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 4px solid rgba(16, 185, 129, 0.2);
+    border-radius: 50%;
+}
+
+.checkmark.draw::after {
+    animation-duration: 800ms;
+    animation-timing-function: ease;
+    animation-name: checkmarkDraw;
+    transform: scaleX(-1) rotate(135deg);
+}
+
+.checkmark::after {
+    opacity: 1;
+    height: 40px;
+    width: 20px;
+    transform-origin: left top;
+    border-right: 4px solid var(--success-color);
+    border-top: 4px solid var(--success-color);
+    content: '';
+    left: 20px;
+    top: 42px;
+    position: absolute;
+}
+
+@keyframes checkmarkDraw {
+    0% { height: 0; width: 0; opacity: 1; }
+    20% { height: 0; width: 20px; opacity: 1; }
+    40% { height: 40px; width: 20px; opacity: 1; }
+    100% { height: 40px; width: 20px; opacity: 1; }
+}
+
+@keyframes scaleCheckmark {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.success-text {
+    font-family: var(--font-handwritten);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--success-color);
+}
+
+/* Card Shake & Error Animation */
+.shake-card {
+    animation: shakeCard 0.5s ease-in-out;
+}
+
+@keyframes shakeCard {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+/* --- 3. Cinematic Transition Screen --- */
+#transition-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    background: #000000;
+    z-index: 100;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 2s ease;
+}
+
+.transition-message {
+    padding: 20px;
+    text-align: center;
+}
+
+.glowing-transition-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: scale(0.95);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4), 0 0 30px rgba(236, 72, 153, 0.3);
+    animation: transitionTextGlow 4s ease-in-out forwards;
+}
+
+@keyframes transitionTextGlow {
+    0% { opacity: 0; transform: scale(0.92); filter: blur(4px); }
+    20% { opacity: 1; transform: scale(1); filter: blur(0px); }
+    80% { opacity: 1; transform: scale(1.02); filter: blur(0px); }
+    100% { opacity: 0; transform: scale(1.05); filter: blur(6px); }
+}
+
+/* --- 4. Slideshow Screen Details --- */
+#slideshow-screen {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    background: radial-gradient(circle, #2d1b33 0%, #0d0812 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+}
+
+.slideshow-light-rays {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 30%, rgba(236, 72, 153, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.slideshow-container {
+    position: relative;
+    width: 85%;
+    max-width: 380px;
+    height: auto;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Polaroid Card Design */
+.polaroid-card {
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 16px 16px 36px 16px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    opacity: 0;
+    transform: scale(0.9) rotate(-3deg);
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.polaroid-card.active {
+    opacity: 1;
+    position: relative;
+}
+
+.polaroid-img-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+    background: #f3f4f6;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.polaroid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.polaroid-caption {
+    font-family: var(--font-handwritten);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #27272a;
+    text-align: center;
+    margin-top: 18px;
+    white-space: nowrap;
+}
+
+/* Slideshow Quote Panel */
+.slideshow-quote-overlay {
+    position: absolute;
+    bottom: 8%;
+    width: 90%;
+    max-width: 440px;
+    text-align: center;
+    z-index: 3;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.slideshow-quote-overlay.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quote-text {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: #fbcfe8;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.5px;
+}
+
+.heart-icon {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    animation: beatQuoteHeart 1.2s infinite alternate;
+}
+
+@keyframes beatQuoteHeart {
+    0% { transform: scale(0.9); }
+    100% { transform: scale(1.2); }
+}
+
+/* --- Slide transitions & cinematic effects --- */
+.polaroid-card.active.fx-fade-in {
+    opacity: 1;
+    transform: scale(1) rotate(2deg);
+}
+
+.polaroid-card.active.fx-zoom-in {
+    opacity: 1;
+    transform: scale(1.05) rotate(-1deg);
+    animation: panZoomInEffect 4s forwards linear;
+}
+
+.polaroid-card.active.fx-zoom-out {
+    opacity: 1;
+    transform: scale(1) rotate(1deg);
+    animation: panZoomOutEffect 4s forwards linear;
+}
+
+.polaroid-card.active.fx-rotate {
+    opacity: 1;
+    transform: scale(1) rotate(-3deg);
+    animation: rotateEffect 4s forwards linear;
+}
+
+.polaroid-card.active.fx-blur-focus {
+    opacity: 1;
+    transform: scale(1) rotate(1.5deg);
+    animation: blurFocusEffect 4.2s forwards ease-out;
+}
+
+.polaroid-card.active.fx-floating-card {
+    opacity: 1;
+    transform: scale(1) rotate(-1.5deg);
+    animation: floatEffect 4.5s infinite alternate ease-in-out;
+}
+
+/* Animations declarations */
+@keyframes panZoomInEffect {
+    0% { transform: scale(0.92) rotate(-2deg); }
+    100% { transform: scale(1.06) rotate(1deg); }
+}
+
+@keyframes panZoomOutEffect {
+    0% { transform: scale(1.08) rotate(2deg); }
+    100% { transform: scale(0.98) rotate(-1deg); }
+}
+
+@keyframes rotateEffect {
+    0% { transform: scale(1) rotate(-4deg); }
+    100% { transform: scale(1.03) rotate(3deg); }
+}
+
+@keyframes blurFocusEffect {
+    0% { filter: blur(10px); transform: scale(0.95) rotate(0deg); }
+    30% { filter: blur(0px); transform: scale(1) rotate(2deg); }
+    100% { transform: scale(1.03) rotate(2deg); }
+}
+
+@keyframes floatEffect {
+    0% { transform: translateY(0) rotate(-1deg); }
+    100% { transform: translateY(-15px) rotate(2deg); }
+}
+
+/* Heart mask animation overlay */
+.heart-mask-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 30%, #ffffff 80%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease;
+}
+
+.polaroid-card.fx-heart-mask .heart-mask-overlay {
+    opacity: 1;
+    animation: heartMaskZoom 4s forwards ease-out;
+}
+
+@keyframes heartMaskZoom {
+    0% { background: radial-gradient(circle, transparent 5%, #ffffff 30%); }
+    100% { background: radial-gradient(circle, transparent 65%, #ffffff 100%); }
+}
+
+/* --- 5. Grand Celebration Screen Details --- */
+#celebration-screen {
+    width: 100%;
+    max-width: 500px;
+}
+
+.celebration-card {
+    background: rgba(255, 255, 255, 0.52);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 20px 50px rgba(236, 72, 153, 0.22);
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: none; /* Hide scrollbar for clean appearance */
+}
+
+.celebration-card::-webkit-scrollbar {
+    display: none;
+}
+
+.celebration-header {
+    margin-bottom: 25px;
+}
+
+.glowing-hearts-row {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    animation: floatHeartsRow 3s infinite ease-in-out alternate;
+}
+
+@keyframes floatHeartsRow {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+
+.celebration-title {
+    font-family: var(--font-cursive);
+    font-size: 3.4rem;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+/* Animated gradient text for heading */
+.animated-gradient-text {
+    background: linear-gradient(135deg, #be185d 0%, #ec4899 50%, #d946ef 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textGradientFlow 4s linear infinite;
+    text-shadow: 0 2px 10px rgba(236, 72, 153, 0.1);
+}
+
+@keyframes textGradientFlow {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+
+.love-letter {
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    padding: 25px 20px;
+    margin-bottom: 25px;
+}
+
+.letter-para {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+.celebration-card.active-reveal .letter-para {
+    animation: letterFadeUp 0.8s forwards ease-out;
+}
+
+/* Stagger paragraph entrance */
+.celebration-card.active-reveal .letter-para:nth-child(1) { animation-delay: 0.2s; }
+.celebration-card.active-reveal .letter-para:nth-child(2) { animation-delay: 0.9s; }
+.celebration-card.active-reveal .letter-para:nth-child(3) { animation-delay: 1.6s; }
+.celebration-card.active-reveal .letter-para:nth-child(4) { animation-delay: 2.3s; }
+.celebration-card.active-reveal .letter-para:nth-child(6) { animation-delay: 3.2s; }
+.celebration-card.active-reveal .letter-para:nth-child(8) { animation-delay: 4.2s; }
+
+@keyframes letterFadeUp {
+    0% { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.text-highlight {
+    font-family: var(--font-handwritten) !important;
+    font-size: 1.6rem !important;
+    font-weight: 700;
+    color: var(--text-romantic);
+}
+
+.signature {
+    font-family: var(--font-cursive) !important;
+    font-size: 2.1rem !important;
+    color: var(--text-romantic);
+    margin-top: 15px;
+}
+
+/* Forever glowing badge */
+.forever-badge-container {
+    margin-bottom: 25px;
+}
+
+.forever-badge {
+    display: inline-block;
+    padding: 8px 24px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1.5px solid var(--primary-color);
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-romantic);
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.15);
+    animation: borderGlowPulse 2s infinite alternate;
+}
+
+@keyframes borderGlowPulse {
+    0% {
+        box-shadow: 0 0 5px rgba(236, 72, 153, 0.2), inset 0 0 5px rgba(236, 72, 153, 0.1);
+        border-color: rgba(236, 72, 153, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(236, 72, 153, 0.5), inset 0 0 10px rgba(236, 72, 153, 0.2);
+        border-color: rgba(236, 72, 153, 1);
+    }
+}
+
+/* Voice Message Player UI */
+.voice-card {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.voice-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.voice-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.voice-play-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: none;
+    outline: none;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px var(--primary-glow);
+    transition: all 0.2s ease;
+}
+
+.voice-play-btn:hover {
+    transform: scale(1.08);
+    background: var(--primary-hover);
+}
+
+.voice-play-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.audio-progress-bar {
+    flex-grow: 1;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.audio-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 10px;
+    transition: width 0.1s linear;
+}
+
+.audio-time {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    min-width: 32px;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 480px) {
+    #app-container {
+        padding: 15px;
+    }
+    
+    .glass-card {
+        padding: 30px 20px;
+        border-radius: 24px;
+    }
+    
+    .welcome-title {
+        font-size: 2.3rem;
+    }
+    
+    .cursive-title {
+        font-size: 2.2rem;
+    }
+    
+    .question-title {
+        font-size: 1.35rem;
+    }
+    
+    #quiz-input {
+        font-size: 1.05rem;
+        padding: 12px 5px;
+    }
+    
+    .polaroid-caption {
+        font-size: 1.5rem;
+        margin-top: 12px;
+    }
+    
+    .quote-text {
+        font-size: 1.1rem;
+    }
+    
+    .celebration-title {
+        font-size: 2.7rem;
+    }
+    
+    .letter-para {
+        font-size: 0.95rem;
+    }
+    
+    .text-highlight {
+        font-size: 1.35rem !important;
+    }
+    
+    .signature {
+        font-size: 1.8rem !important;
+    }
+}
